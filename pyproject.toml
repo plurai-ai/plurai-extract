@@ -1,0 +1,71 @@
+[project]
+name = "plurai-extract"
+version = "1.0.1"
+description = "Extract documents and records from data sources for Plurai simulation"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Plurai" }]
+keywords = ["plurai", "extraction", "rag", "sql", "corpus", "simulation"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Database",
+    "Topic :: Text Processing",
+]
+# The mandatory dependencies are the schema types (``pydantic``, imported at module level)
+# and token chunking (``tiktoken``, imported lazily inside ``chunk_tokens``). Every
+# data-source driver is an opt-in extra below, so an install carries only what its source needs.
+dependencies = [
+    "pydantic>=2.0",
+    "tiktoken",
+]
+
+[project.urls]
+Homepage = "https://github.com/plurai-ai/plurai-extract"
+Repository = "https://github.com/plurai-ai/plurai-extract"
+Issues = "https://github.com/plurai-ai/plurai-extract/issues"
+Changelog = "https://github.com/plurai-ai/plurai-extract/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+# One extra per source driver. pypdfium2 tells a blank page from a page that draws
+# something the reader extracted no text from.
+pdf = ["docling>=2.69.1", "pypdfium2>=4.30.0"]
+http = ["aiohttp>=3.8"]
+vertex = ["google-cloud-discoveryengine>=0.11"]
+bigquery = ["google-cloud-bigquery>=3.0"]
+redshift = ["boto3>=1.26"]
+azure-sql = ["pyodbc>=4.0"]
+databricks = ["databricks-sql-connector>=2.0"]
+snowflake = ["snowflake-connector-python>=3.0"]
+bedrock = ["langchain-aws>=0.2.0"]
+all = ["plurai-extract[pdf,http,vertex,bigquery,redshift,azure-sql,databricks,snowflake,bedrock]"]
+# pypdfium2 is the one real PDF dependency in the tests: whether a page draws is a fact about the file.
+# pyyaml parses the workflow files in the tests.
+dev = ["pytest", "pytest-asyncio", "pypdfium2>=4.30.0", "pyyaml"]
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["plurai_extract*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 160
+target-version = "py311"
+extend-exclude = [".claude/skills"]
+
+[tool.ruff.lint]
+# Pycodestyle errors (E4, E7, E9) and Pyflakes. Pinned explicitly so a ruff release that
+# widens its default rule set does not change what CI enforces.
+select = ["E4", "E7", "E9", "F"]
