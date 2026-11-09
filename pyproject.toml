@@ -1,14 +1,16 @@
 [project]
 name = "plurai-extract"
-version = "1.0.1"
+version = "1.0.2"
 description = "Extract documents and records from data sources for Plurai simulation"
 readme = "README.md"
+license = {text = "Proprietary"}
 requires-python = ">=3.11"
 authors = [{ name = "Plurai" }]
 keywords = ["plurai", "extraction", "rag", "sql", "corpus", "simulation"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
+    "License :: Other/Proprietary License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",

@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented in this file.
 
+## 1.0.2
+
+- **License.** The package metadata and `LICENSE` declare the package as proprietary software under the terms in `LICENSE`. Version 1.0.1 declares no license.
+
 ## 1.0.1
 
 First public release.

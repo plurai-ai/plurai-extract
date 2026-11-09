@@ -54,5 +54,5 @@ payload = [d.to_dict() for d in documents]
 
 ## Issues and release notes
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for how to report issues, and
-[CHANGELOG.md](CHANGELOG.md) for release notes.
+See [CONTRIBUTING.md](https://github.com/plurai-ai/plurai-extract/blob/main/CONTRIBUTING.md) for how to report issues, and
+[CHANGELOG.md](https://github.com/plurai-ai/plurai-extract/blob/main/CHANGELOG.md) for release notes.
